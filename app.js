@@ -16,3 +16,42 @@ hihatSongs.forEach((songs,index)=>{
     hihatSelect.insertAdjacentHTML("beforeend",`<option value="${songs.path}">${songs.name}</option>`)
 })
 //Option End
+
+class DrumKit{
+    constructor(){
+        this.pads = document.querySelectorAll(".pad");
+        this.kickAudio = document.querySelector(".kick-sound");
+        this.snareAudio = document.querySelector(".snare-sound");
+        this.hihatAudio = document.querySelector(".hihat-sound");
+        this.play = document.querySelector(".play");
+        this.index = 0;
+        this.bpm = 40;
+    }
+
+    activePads(){
+        this.classList.toggle("active");
+    }
+
+    repeat(){
+        let step = this.index % 8;
+        const activeBars = document.querySelectorAll(`.b${step}`);
+        console.log(step);
+        this.index++;
+    }
+    start(){
+        const interval = (60 / this.bpm) * 1000;
+        setInterval(()=>{
+            this.repeat();
+        },interval)
+    }
+}
+
+const drumkit = new DrumKit();
+
+drumkit.pads.forEach((pad)=>{
+    pad.addEventListener("click",drumkit.activePads);
+})
+
+drumkit.play.addEventListener("click",()=>{
+    drumkit.start();
+})
