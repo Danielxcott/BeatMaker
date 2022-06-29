@@ -85,10 +85,7 @@ i{
     margin: 5rem;
     cursor: pointer;
 }
-.controls button.active{
-    background-color: #413F42;
 
-}
 .play{
     padding: 1rem 2rem;
     background-color: #7F8487;
@@ -97,6 +94,10 @@ i{
     border-radius: 8px;
     cursor: pointer;
     margin-top: 3rem;
+}
+
+.play.active{
+    background-color: #3f4243;
 }
 
 select{

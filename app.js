@@ -26,6 +26,7 @@ class DrumKit{
         this.play = document.querySelector(".play");
         this.index = 0;
         this.bpm = 120;
+        this.isPlaying = null;
     }
 
     activePads(){
@@ -59,9 +60,25 @@ class DrumKit{
     }
     start(){
         const interval = (60 / this.bpm) * 1000;
-        setInterval(()=>{
-            this.repeat();
-        },interval)
+        //fix play button 
+        if(!this.isPlaying){
+          this.isPlaying = setInterval(()=>{
+                this.repeat();
+            },interval)
+        }else{
+            clearInterval(this.isPlaying);
+            this.isPlaying = null;
+        }  
+    }
+    //change the text button 
+    updateBtn(){
+        if(!this.isPlaying){
+            this.play.innerText = "Play";
+            this.play.classList.remove("active");
+        }else{
+            this.play.innerText = "Stop";
+            this.play.classList.add("active");
+        }
     }
 }
 
@@ -76,4 +93,6 @@ drumkit.pads.forEach((pad)=>{
 
 drumkit.play.addEventListener("click",()=>{
     drumkit.start();
+    drumkit.updateBtn();
+
 })
