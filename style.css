@@ -106,3 +106,11 @@ select{
     border-radius: 8px;
     outline: none;
 }
+
+@keyframes playTrack{
+    from{   
+        transform: scale(1);
+    }to{
+        transform: scale(1.2);
+    }
+}
