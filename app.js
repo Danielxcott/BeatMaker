@@ -150,6 +150,7 @@ class DrumKit {
   updateTempo(e){
     this.bpm = e.target.value;
     clearInterval(this.isPlaying);
+    this.isPlaying = null;
     if(this.play.classList.contains("active")){
         this.start();
     }
