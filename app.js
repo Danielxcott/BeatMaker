@@ -1,7 +1,6 @@
 const kickSelect = document.querySelector("#kickSelect");
 const snareSelect = document.querySelector("#snareSelect");
 const hihatSelect = document.querySelector("#hihatSelect");
-
 //Option Start
 kickSongs.forEach((songs, index) => {
   kickSelect.insertAdjacentHTML(
@@ -32,6 +31,7 @@ class DrumKit {
     this.snareAudio = document.querySelector(".snare-sound");
     this.hihatAudio = document.querySelector(".hihat-sound");
     this.play = document.querySelector(".play");
+    this.muteBtn = document.querySelectorAll(".mute");
     this.selects = document.querySelectorAll("select");
     this.index = 0;
     this.bpm = 120;
@@ -67,7 +67,7 @@ class DrumKit {
 
     this.index++;
   }
-  
+
   start() {
     const interval = (60 / this.bpm) * 1000;
     //fix play button
@@ -108,6 +108,37 @@ class DrumKit {
         break;
     }
   }
+
+  //mute the audio;
+  muteAudio(e){
+    const track = e.target.getAttribute("data-track");
+    e.target.classList.toggle('active');
+    if(e.target.classList.contains("active")){
+        switch(track){
+            case "0":
+            this.kickAudio.volume = 0;
+            break;
+            case "1":
+            this.snareAudio.volume = 0;
+            break;
+            case "2":
+            this.hihatAudio.volume = 0;
+            break;
+        }
+    }else{
+        switch(track){
+            case "0":
+            this.kickAudio.volume = 1;
+            break;
+            case "1":
+            this.snareAudio.volume = 1;
+            break;
+            case "2":
+            this.hihatAudio.volume = 1;
+            break;
+        }
+    }
+  }
 }
 
 const drumkit = new DrumKit();
@@ -129,3 +160,9 @@ drumkit.selects.forEach((select) => {
     drumkit.updateSong(e);
   });
 });
+
+drumkit.muteBtn.forEach((btn)=>{
+    btn.addEventListener("click",(e)=>{
+        drumkit.muteAudio(e);
+    })
+})

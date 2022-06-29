@@ -85,6 +85,9 @@ i{
     margin: 5rem;
     cursor: pointer;
 }
+.controls button.active{
+    background-color: #3f4243;
+}
 
 .play{
     padding: 1rem 2rem;
